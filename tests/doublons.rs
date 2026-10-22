@@ -39,7 +39,7 @@ fn name(v: &Value) -> String {
 
 /// Gros fichier pseudo-aléatoire (le pré-filtre partiel s'applique au-delà de 128 Ko)
 fn big(seed: u8, len: usize) -> Vec<u8> {
-    let mut x = seed as u32 * 2_654_435_761 + 1;
+    let mut x = (seed as u32).wrapping_mul(2_654_435_761).wrapping_add(1);
     (0..len)
         .map(|_| {
             x ^= x << 13;
